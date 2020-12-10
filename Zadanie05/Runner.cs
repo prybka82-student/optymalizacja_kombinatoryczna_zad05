@@ -43,8 +43,8 @@ namespace Zadanie05
 
         public async Task RunAsync(ISolver<int> solver)
         {
-            int min = 3;
-            int max = 200;
+            int min = 1;
+            int max = 50_000;
 
             var prompt = $"How many numbers are there in the set?\n(Provide a number greater or equal than {min} and less or equal than {max}";
             var errorMsg = ">>@VAL<< is not a valid number of items.";
