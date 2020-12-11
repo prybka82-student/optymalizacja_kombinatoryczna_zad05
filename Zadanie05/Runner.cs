@@ -44,7 +44,7 @@ namespace Zadanie05
         public async Task RunAsync(ISolver<int> solver)
         {
             int min = 1;
-            int max = 50_000;
+            int max = (int)Math.Pow(10.0, 5.0);
 
             var prompt = $"How many numbers are there in the set?\n(Provide a number greater or equal than {min} and less or equal than {max}";
             var errorMsg = ">>@VAL<< is not a valid number of items.";
@@ -55,7 +55,7 @@ namespace Zadanie05
             var form = n == 1 ? "number" : "numbers";
 
             min = 1;
-            max = 100;
+            max = 50_000;
             prompt = $"Enter {n} integer {form}, and press Enter after each number.)";
 
             var seq = InputSequence(n, prompt, "Provide item number @NUM:\n", errorMsg, min, max)
