@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace Zadanie05
 {
-    public class Solver : ISolver<int>
+    public class Solver : ISolver<long>
     {
-        public async Task<int> SolveAsync(IEnumerable<int> sequence)
+        public async Task<long> SolveAsync(IEnumerable<long> sequence)
         {
             return await Task.Run(() => FindSmallest(sequence));
         }
 
-        private int FindSmallest(IEnumerable<int> sequence)
+        private long FindSmallest(IEnumerable<long> sequence)
         {
             var sortedSequence = sequence.OrderBy(x => x);
 
-            var res = 1;
+            var res = 1L;
 
-            for (int i = 0; i < sequence.Count() && sequence.ElementAt(i) <= res; i++)
+            for (long i = 0; i < sequence.Count() && sequence.ElementAt((int)i) <= res; i++)
             {
-                res = res + sequence.ElementAt(i);
+                res = res + sequence.ElementAt((int)i);
             }
 
             return res;

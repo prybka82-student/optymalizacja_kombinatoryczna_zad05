@@ -16,16 +16,16 @@ namespace Zadanie05
             Console.WriteLine(msg);
         }
 
-        private IEnumerable<double> InputSequence(int counter,
+        private IEnumerable<long> InputSequence(long counter,
             string sequencePrompt, string itemPrompt, string itemErrorMessage, double min, double max)
         {
-            for (int i = 0; i < counter; i++)
+            for (long i = 0; i < counter; i++)
             {
                 yield return Input(itemPrompt.Replace("@NUM", (i + 1).ToString()), itemErrorMessage, min, max);
             }
         }
 
-        private double Input(string prompt, string errorMsg, double min, double max)
+        private long Input(string prompt, string errorMsg, double min, double max)
         {
             while (true)
             {
@@ -33,7 +33,7 @@ namespace Zadanie05
 
                 var input = Console.ReadLine();
 
-                if (double.TryParse(input, out double val))
+                if (long.TryParse(input, out long val))
                     if (val >= min && val <= max)
                         return val;
 
@@ -41,15 +41,15 @@ namespace Zadanie05
             }
         }
 
-        public async Task RunAsync(ISolver<int> solver)
+        public async Task RunAsync(ISolver<long> solver)
         {
-            int min = 1;
-            int max = (int)Math.Pow(10.0, 5.0);
+            long min = 1;
+            long max = (int)Math.Pow(10.0, 5.0);
 
             var prompt = $"How many numbers are there in the set?\n(Provide a number greater or equal than {min} and less or equal than {max}";
             var errorMsg = ">>@VAL<< is not a valid number of items.";
 
-            var n = (int)Input(prompt, errorMsg, min, max);
+            var n = (long)Input(prompt, errorMsg, min, max);
 
             //var form = n == 1 ? "liczbę" : "234".Contains(n.ToString().Last()) ? "liczby" : "liczb";
             var form = n == 1 ? "number" : "numbers";
@@ -59,7 +59,7 @@ namespace Zadanie05
             prompt = $"Enter {n} integer {form}, and press Enter after each number.)";
 
             var seq = InputSequence(n, prompt, "Provide item number @NUM:\n", errorMsg, min, max)
-                .Select(x => (int)x)
+                .Select(x => (long)x)
                 .ToList();
 
             var timer = Stopwatch.StartNew();
